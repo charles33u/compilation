@@ -1,0 +1,33 @@
+/*
+* SOURCE CUP : expression de constante enti�re
+*/
+
+package generated.fr.ul.miashs.expression;
+
+/* code java */
+parser code {:
+	public int resultat = 0;
+:}
+
+/*grammaire */
+/*1: terminaux*/
+terminal PO,PF, ADD, MUL;
+terminal String NUM;
+/*2 : axione/start */
+non terminal l;
+non terminal Integer a,x,f;
+/*3 : axione/start */
+start with l;
+
+/*4: r�gles de production*/
+l ::= x:e		{:resultat = e; :}
+   ;
+x ::= x:e1 ADD f:e2	{: RESULT = e1 + e2; :}
+   | f:e			{: RESULT = e; :}
+   ;
+f ::= f:e1 MUL a:e2	{: RESULT = e1 * e2; :}
+   | a:e			{: RESULT = e; :}
+   ;
+a ::= NUM:c			{: RESULT = new Integer(c); :}
+   |PO x:e PF		{: RESULT = e; :}
+   ;
